@@ -1,10 +1,11 @@
-import express from "express";
-import asyncWrapper from "../../middleware/asyncWrapper";
-import verifyToken from "../../middleware/verifyToken";
+import express, { Request } from "express";
 import config from "../../DefaultConfig/config";
-import { business_controller } from "./business_controller";
+import asyncWrapper from "../../middleware/asyncWrapper";
 import uploadFile from "../../middleware/fileUploader";
 import validateRequest from "../../middleware/validateRequest";
+import verifyToken from "../../middleware/verifyToken";
+import { setting_service } from '../Setting/setting_service';
+import { business_controller } from "./business_controller";
 import { business_validate } from "./business_validate";
 export const business_router = express.Router();
 
@@ -13,7 +14,10 @@ business_router
     "/business/create",
     uploadFile(),
     validateRequest(business_validate.create_validate),
-    verifyToken(config.USER),
+    verifyToken(config.USER, true, undefined, async (req: Request) => {
+      const web_setting = await setting_service.get_web_setting();
+      return { web_setting };
+    }),
     asyncWrapper(business_controller.create),
   )
 
@@ -23,7 +27,7 @@ business_router
     "/business/update/:id",
     uploadFile(),
     validateRequest(business_validate.update_validate),
-    verifyToken(config.USER),
+    verifyToken(config.VENDOR),
     asyncWrapper(business_controller.update),
   )
 

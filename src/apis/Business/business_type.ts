@@ -13,15 +13,12 @@ export interface IBusiness extends Document {
   block: boolean;
   is_approve: boolean;
   trade_license: string | null;
-  business_category:
-    | "salon"
-    | "restaurant"
-    | "medical"
-    | "fitness"
-    | "shop"
-    | "real_estate"
-    | "services"
-    | "other";
+  business_category: "salon"
+  | "restaurant"
+  | "medical"
+  | "fitness"
+  | "services"
+  | "other";
   business_sub_admins: Types.ObjectId[];
   business_documents: string[];
 }

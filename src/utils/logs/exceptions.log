@@ -22275,3 +22275,14 @@ src/apis/Auth/auth_validate.ts(8,12): error TS1136: Property assignment expected
     at listenInCluster (node:net:1996:12)
     at node:net:2205:7
     at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-05-18 08:02:34 [ERROR]: Error: Neither apiKey nor config.authenticator provided
+    at Stripe._setAuthenticator (/home/siyam/Desktop/projects/backend/parlor_backend/node_modules/stripe/cjs/stripe.core.js:166:23)
+    at new Stripe (/home/siyam/Desktop/projects/backend/parlor_backend/node_modules/stripe/cjs/stripe.core.js:102:14)
+    at Object.<anonymous> (/home/siyam/Desktop/projects/backend/parlor_backend/src/apis/Payment/payment_controller.ts:10:23)
+    at Module._compile (node:internal/modules/cjs/loader:1529:14)
+    at Module._compile (/home/siyam/Desktop/projects/backend/parlor_backend/node_modules/source-map-support/source-map-support.js:568:25)
+    at Module.m._compile (/tmp/ts-node-dev-hook-282743669292953.js:69:33)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1613:10)
+    at require.extensions..jsx.require.extensions..js (/tmp/ts-node-dev-hook-282743669292953.js:114:20)
+    at require.extensions.<computed> (/tmp/ts-node-dev-hook-282743669292953.js:71:20)
+    at Object.nodeDevHook [as .ts] (/home/siyam/Desktop/projects/backend/parlor_backend/node_modules/ts-node-dev/lib/hook.js:63:13)

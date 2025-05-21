@@ -61,8 +61,6 @@ const business_schema = new Schema<IBusiness>({
       "restaurant",
       "medical",
       "fitness",
-      "shop",
-      "real_estate",
       "services",
       "other",
     ],
