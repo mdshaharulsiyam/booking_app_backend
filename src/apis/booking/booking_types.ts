@@ -5,7 +5,6 @@ import { Document, Types } from "mongoose";
 export interface IBooking extends Document {
   business: Types.ObjectId,
   user: Types.ObjectId,
-  category: [Types.ObjectId];
   services: [Types.ObjectId];
   date: Date;
   startTime: Date;

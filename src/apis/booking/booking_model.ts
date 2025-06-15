@@ -44,11 +44,6 @@ const booking_schema = new Schema<IBooking>(
       required: false,
       default: null,
     },
-    category: [{
-      type: Schema.Types.ObjectId,
-      required: [true, 'At least one category must be provided'],
-      ref: 'category'
-    }],
     services: [{
       type: Schema.Types.ObjectId,
       required: [true, 'At least one service must be provided'],
