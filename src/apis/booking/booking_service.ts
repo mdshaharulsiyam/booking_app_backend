@@ -9,6 +9,8 @@ import auth_model from '../Auth/auth_model';
 import { IAuth } from '../Auth/auth_types';
 import { business_model } from '../Business/business_model';
 import { IBusiness } from '../Business/business_type';
+import { service_listing_model } from '../service listing/service_listing_model';
+import { IService_listing } from '../service listing/service_listing_types';
 import { service_model } from '../Service/service_model';
 import { booking_model } from "./booking_model";
 import { IBooking } from './booking_types';
@@ -19,7 +21,8 @@ const validate_booking_request = (
   Day: string,
   endDate: Date,
   startDate: Date,
-  startTime: string
+  startTime: string,
+  services: IService_listing[]
 ) => {
   if (isExistingBooking) return "booking already exists for this time";
   if (!requestedUser) return "user not found or not verified";
@@ -28,6 +31,10 @@ const validate_booking_request = (
   if (endDate <= startDate) return "invalid end date";
   if (business.availability[Day as keyof typeof business.availability].length === 0) return "business is not available on this day";
   if (new Date(business.availability[Day as keyof typeof business.availability][0] as string) > new Date(startTime)) return "business is not available during this time";
+  const business_ids = services.map((service: IService_listing) => service.business.toString());
+  const business_id = business._id as string;
+  const invalid_business_ids = business_ids.filter((id: string) => id !== business_id.toString());
+  if (invalid_business_ids.length > 0) return "services are not available for this business";
   return null;
 }
 const create = async (data: any, user: IAuth) => {
@@ -40,7 +47,7 @@ const create = async (data: any, user: IAuth) => {
   const endDate = new Date(`${data.date} ${endTime}`);
   const Day = config.WEEK[new Date(data.date).getDay()];
 
-  const [isExistingBooking, requestedUser, business] = await Promise.all([
+  const [isExistingBooking, requestedUser, business, services] = await Promise.all([
     booking_model.findOne({
       endTime: { $gte: startDate },
       startTime: { $lte: endDate },
@@ -56,6 +63,9 @@ const create = async (data: any, user: IAuth) => {
       is_approve: true,
       block: false,
     }),
+    service_listing_model.find({
+      _id: { $in: otherValues?.services || [] },
+    })
   ]);
   const is_error = validate_booking_request(
     isExistingBooking?.toObject() || null,
@@ -65,6 +75,7 @@ const create = async (data: any, user: IAuth) => {
     endDate,
     startDate,
     startTime,
+    services
   )
   if (is_error) throw new Error(is_error);
 

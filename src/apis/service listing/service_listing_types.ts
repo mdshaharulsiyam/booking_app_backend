@@ -10,5 +10,6 @@ export interface IService_listing extends Document {
   description: string;
   user: Types.ObjectId;
   business: Types.ObjectId;
+  price?: number;
 }
 

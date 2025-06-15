@@ -36,6 +36,11 @@ const service_listing_schema = new Schema<IService_listing>({
     type: Schema.Types.ObjectId,
     required: [true, 'business is required'],
     ref: "business"
+  },
+  price: {
+    type: Number,
+    required: [true, 'price is required'],
+    min: [0, 'Price cannot be negative']
   }
 }, { timestamps: true });
 
