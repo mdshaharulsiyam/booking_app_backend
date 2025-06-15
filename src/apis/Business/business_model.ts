@@ -1,5 +1,22 @@
 import { Schema, model } from "mongoose";
 import { IBusiness } from "./business_type";
+const dayAvailability = {
+  type: [String],
+  default: [],
+  validate: {
+    validator: (arr: string[]) => arr.length === 0 || arr.length === 2,
+    message: 'Availability must be either empty or exactly two dates (start and end).'
+  }
+};
+const availabilitySchema = new Schema({
+  monday: dayAvailability,
+  tuesday: dayAvailability,
+  wednesday: dayAvailability,
+  thursday: dayAvailability,
+  friday: dayAvailability,
+  saturday: dayAvailability,
+  sunday: dayAvailability,
+}, { _id: false });
 
 const business_schema = new Schema<IBusiness>({
   user: {
@@ -75,7 +92,8 @@ const business_schema = new Schema<IBusiness>({
     type: [String],
     default: [],
   },
-});
+  availability: availabilitySchema,
+}, { timestamps: true });
 
 business_schema.index({ location: "2dsphere" });
 

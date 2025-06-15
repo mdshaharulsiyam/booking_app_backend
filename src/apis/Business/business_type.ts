@@ -5,6 +5,15 @@ export interface IBusiness extends Document {
   name: string;
   logo: string | null;
   banner: string;
+  availability: {
+    monday: [string] | [];
+    tuesday: [string] | [];
+    wednesday: [string] | [];
+    thursday: [string] | [];
+    friday: [string] | [];
+    saturday: [string] | [];
+    sunday: [string] | [];
+  };
   address: string;
   location: {
     type: "Point";

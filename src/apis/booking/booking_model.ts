@@ -38,6 +38,12 @@ const booking_schema = new Schema<IBooking>(
       ref: 'auth',
       required: [true, 'User ID is required'],
     },
+    acceptedBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'auth',
+      required: false,
+      default: null,
+    },
     category: [{
       type: Schema.Types.ObjectId,
       required: [true, 'At least one category must be provided'],

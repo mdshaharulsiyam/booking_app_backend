@@ -1,4 +1,4 @@
-import { Schema, model, CallbackError } from "mongoose";
+import { CallbackError, Schema, model } from "mongoose";
 import config from "../../DefaultConfig/config";
 import hashText from "../../utils/hashText";
 import { IAuth, IStripe } from "./auth_types";
@@ -130,6 +130,10 @@ const auth_schema = new Schema<IAuth>(
     stripe: {
       type: stripe_schema,
       default: null,
+    },
+    point: {
+      type: Number,
+      default: 0,
     },
   },
   {

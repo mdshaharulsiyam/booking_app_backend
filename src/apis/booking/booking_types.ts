@@ -13,6 +13,7 @@ export interface IBooking extends Document {
   Day: string;
   status: [IStatus]
   statusUpdatedBy: "USER" | 'ADMIN' | "SUPER_ADMIN" | "BUSINESS",
+  acceptedBy?: Types.ObjectId,
   address: string
   location: {
     type: 'Point';

@@ -11,13 +11,13 @@ export interface IAuth extends Document {
   phone: string;
   img: string;
   role:
-    | "ADMIN"
-    | "SUPER_ADMIN"
-    | "PROFESSIONAL"
-    | "PROFESSIONAL"
-    | "RIDER"
-    | "VENDOR"
-    | "USER";
+  | "ADMIN"
+  | "SUPER_ADMIN"
+  | "PROFESSIONAL"
+  | "PROFESSIONAL"
+  | "RIDER"
+  | "VENDOR"
+  | "USER";
   block: boolean;
   provider: "GOOGLE" | "CREDENTIAL" | "FACEBOOK" | "GITHUB" | "APPLE";
   is_verified: boolean;
@@ -26,6 +26,7 @@ export interface IAuth extends Document {
   documents: string[];
   is_identity_verified: boolean;
   stripe: IStripe;
+  point: Number
   createdAt: Date;
   updatedAt: Date;
 }
