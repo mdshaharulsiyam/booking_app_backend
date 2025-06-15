@@ -37,8 +37,10 @@ const business_schema = new Schema<IBusiness>({
     required: [true, "Business banner is required"],
   },
   address: {
-    type: String,
-    required: [true, "Business address is required"], //MultiMart FlexMart
+    district: { type: String, required: true },
+    sub_district: { type: String, required: true },
+    union: { type: String, required: true },
+    post_office: { type: String, required: true },
   },
   location: {
     type: {

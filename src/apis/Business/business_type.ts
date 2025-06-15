@@ -14,7 +14,12 @@ export interface IBusiness extends Document {
     saturday: [string] | [];
     sunday: [string] | [];
   };
-  address: string;
+  address: {
+    district: string;
+    sub_district: string;
+    union: string;
+    post_office: string;
+  };
   location: {
     type: "Point";
     coordinates: [number, number]; // [longitude, latitude]

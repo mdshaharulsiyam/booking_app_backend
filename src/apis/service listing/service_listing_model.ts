@@ -40,7 +40,8 @@ const service_listing_schema = new Schema<IService_listing>({
   price: {
     type: Number,
     required: [true, 'price is required'],
-    min: [0, 'Price cannot be negative']
+    min: [0, 'Price cannot be negative'],
+    default: 0
   }
 }, { timestamps: true });
 

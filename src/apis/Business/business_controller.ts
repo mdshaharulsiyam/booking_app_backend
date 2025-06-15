@@ -15,7 +15,7 @@ const create = async (req: Request, res: Response) => {
 
   req.body.logo = req.body.logo?.[0];
   req.body.banner = req.body.banner?.[0];
-
+  req.body.address = JSON.parse(req.body.address || "{}");
   req.body.is_approve = req?.extra?.web_setting?.data?.auto_approve_vendor;
 
   const result = await business_service.create(req?.body);

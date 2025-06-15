@@ -47,7 +47,7 @@ const booking_schema = new Schema<IBooking>(
     services: [{
       type: Schema.Types.ObjectId,
       required: [true, 'At least one service must be provided'],
-      ref: 'service'
+      ref: 'service_listing'
     }],
     date: {
       type: Date,
