@@ -31,6 +31,7 @@ const validate_booking_request = (
   if (endDate <= startDate) return "invalid end date";
   if (business.availability[Day as keyof typeof business.availability].length === 0) return "business is not available on this day";
   if (new Date(business.availability[Day as keyof typeof business.availability][0] as string) > new Date(startTime)) return "business is not available during this time";
+  if (services.length === 0) return "at least one service is required";
   const business_ids = services.map((service: IService_listing) => service.business.toString());
   const business_id = business._id as string;
   const invalid_business_ids = business_ids.filter((id: string) => id !== business_id.toString());
@@ -81,7 +82,7 @@ const create = async (data: any, user: IAuth) => {
 
   const result = await booking_model.create({
     ...otherValues,
-
+    price: services.reduce((acc, service) => acc + (service?.price || 0), 0),
     endTime: endDate,
     startTime: startDate,
     user: user?._id,
