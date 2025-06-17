@@ -1,12 +1,13 @@
 
-import { SearchKeys } from '../../utils/Queries';
 import { Request, Response } from "express";
-import { service_listing_service } from "./service_listing_service";
-import { sendResponse } from "../../utils/sendResponse";
 import { HttpStatus } from "../../DefaultConfig/config";
+import { SearchKeys } from '../../utils/Queries';
+import { sendResponse } from "../../utils/sendResponse";
 import { IAuth } from '../Auth/auth_types';
+import { service_listing_service } from "./service_listing_service";
 
 const create = async (req: Request, res: Response) => {
+  const { web_setting, business } = req.extra as { web_setting: any, business: any }
   req.body.img = req.body.img?.[0]
 
   const result = await service_listing_service.create(req?.body)
@@ -35,7 +36,6 @@ const get_all = async (req: Request, res: Response) => {
     result
   )
 }
-
 
 const update = async (req: Request, res: Response) => {
   const img = !Array.isArray(req.files) && req.files?.img && req.files.img.length > 0 && req.files.img[0]?.path || null;
