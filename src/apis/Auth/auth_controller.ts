@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
-import { auth_service } from "./auth_service";
-import { sendResponse } from "../../utils/sendResponse";
 import config, { HttpStatus } from "../../DefaultConfig/config";
+import { sendResponse } from "../../utils/sendResponse";
+import { auth_service } from "./auth_service";
 import { IAuth } from "./auth_types";
 
 async function create(req: Request, res: Response) {
+  const { role, ...data } = req.body;
+  const user = req?.user as IAuth;
+  if (user && (user?.role == "ADMIN" || user?.role == "SUPER_ADMIN") && role) {
+    data.role = role.toUpperCase();
+  }
   const result = await auth_service.sign_up(req.body);
 
   sendResponse(res, HttpStatus.SUCCESS, result);

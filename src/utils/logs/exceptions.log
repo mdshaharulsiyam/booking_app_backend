@@ -22286,3 +22286,13 @@ src/apis/Auth/auth_validate.ts(8,12): error TS1136: Property assignment expected
     at require.extensions..jsx.require.extensions..js (/tmp/ts-node-dev-hook-282743669292953.js:114:20)
     at require.extensions.<computed> (/tmp/ts-node-dev-hook-282743669292953.js:71:20)
     at Object.nodeDevHook [as .ts] (/home/siyam/Desktop/projects/backend/parlor_backend/node_modules/ts-node-dev/lib/hook.js:63:13)
+2025-06-18 09:01:13 [ERROR]: Error: listen EADDRNOTAVAIL: address not available 192.168.31.166:5004
+    at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-06-18 09:01:43 [ERROR]: Error: listen EADDRNOTAVAIL: address not available 192.168.31.166:5004
+    at Server.setupListenHandle [as _listen2] (node:net:1917:21)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21)
